@@ -3,3 +3,14 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 
+## install sealed-secrets helm chart ##
+helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
+helm install sealed-secrets sealed-secrets/sealed-secrets
+
+
+## install kubeseal to encrypt your secrets ##
+KUBESEAL_VERSION='0.23.0'
+wget "https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION:?}/kubeseal-${KUBESEAL_VERSION:?}-linux-amd64.tar.gz"
+tar -xvzf kubeseal-${KUBESEAL_VERSION:?}-linux-amd64.tar.gz kubeseal
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+
